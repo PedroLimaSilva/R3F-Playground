@@ -6,18 +6,22 @@ import { useGLTF, useTexture } from '@react-three/drei';
 
 export function Room(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/model/cubes_mesh_simple.glb') as any;
-  const bakedTexture = useTexture('/model/cubes_simple_2048.jpg');
-  bakedTexture.flipY = false;
+  const bgTexture = useTexture('/model/overlapping_cubes.png');
+  bgTexture.flipY = false;
+  const centerTexture = useTexture('/model/cubes_center_2048.jpg');
+  centerTexture.flipY = false;
 
   return (
-    <group {...props} dispose={null} rotation={[0, Math.PI / 4, 0]} scale={2.5}>
+    <group {...props} dispose={null} scale={2.5}>
       <mesh
         castShadow
         receiveShadow
-        // material={materials.Material}
         geometry={nodes.Plane.geometry}
       >
-        <meshBasicMaterial map={bakedTexture} />
+        <meshBasicMaterial map={bgTexture} />
+      </mesh>
+      <mesh geometry={nodes.Center.geometry}>
+        <meshBasicMaterial map={centerTexture} />
       </mesh>
     </group>
   );
