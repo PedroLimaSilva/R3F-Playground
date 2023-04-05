@@ -7,6 +7,8 @@ import { Box } from './components/box';
 import { Room } from './components/Room';
 import { PointOfInterest } from './components/PointOfInterest';
 
+console.log(process.env);
+
 const POINTS_OF_INTEREST: Array<{
   position: [number, number, number];
   margin: number;
