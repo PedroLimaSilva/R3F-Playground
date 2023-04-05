@@ -7,7 +7,10 @@ import { Box } from './components/box';
 import { Room } from './components/Room';
 import { PointOfInterest } from './components/PointOfInterest';
 
-console.log(process.env);
+const isPreview =
+  process.env.NODE_ENV !== 'production' ||
+  process.env.REACT_APP_VERCEL_ENV === 'preview';
+console.log(process.env, isPreview);
 
 const POINTS_OF_INTEREST: Array<{
   position: [number, number, number];
@@ -37,7 +40,7 @@ export function Experience() {
         position: [0, 20, 100],
       }}
     >
-      {process.env.environment !== 'VERCEL' && <Perf position="top-left" />}
+      {isPreview && <Perf position="top-left" />}
 
       <OrbitControls
         makeDefault
