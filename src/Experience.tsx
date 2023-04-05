@@ -12,6 +12,7 @@ export function Experience() {
       <OrbitControls
         makeDefault
         maxDistance={15}
+        minDistance={5}
         enablePan={false}
         maxPolarAngle={Math.PI / 2}
         maxAzimuthAngle={Math.PI / 4}
