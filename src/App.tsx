@@ -6,14 +6,19 @@ import { Experience } from './Experience';
 
 export default function App() {
   return (
-    <Canvas
-      camera={{
-        fov: 45,
-        near: 0.1,
-        far: 200,
-      }}
-    >
+    <Canvas>
       <Experience />
+      <OrthographicCamera
+        makeDefault
+        zoom={1}
+        top={200}
+        bottom={-200}
+        left={200}
+        right={-200}
+        near={1}
+        far={2000}
+        position={[0, 0, 200]}
+      />
     </Canvas>
   );
 }
