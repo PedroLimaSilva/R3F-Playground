@@ -30,4 +30,4 @@ export function Room(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/model/cubes_mesh.glb");
+useGLTF.preload("/model/cubes_mesh_simple.glb");
