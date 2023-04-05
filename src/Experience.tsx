@@ -19,8 +19,13 @@ export function Experience() {
       />
 
       <ambientLight intensity={0.3} />
-      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-      <directionalLight position={[-10, 10, 10]} intensity={0.5} />
+      <pointLight
+        castShadow
+        shadow-mapSize-height={512}
+        shadow-mapSize-width={512}
+        intensity={0.8}
+        position={[100, 100, 100]}
+      />
 
       <Box position={[-1.2, 0, 0]} />
       <Box position={[1.2, 0, 0]} />
