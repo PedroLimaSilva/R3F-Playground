@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { Float, OrbitControls } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 import * as React from 'react';
 
@@ -19,7 +19,7 @@ export function Experience() {
         position: [0, 20, 100],
       }}
     >
-      {process.env.environment !== 'VERCEL' && <Perf position='top-left' />}
+      {process.env.environment !== 'VERCEL' && <Perf position="top-left" />}
 
       <OrbitControls
         makeDefault
@@ -42,7 +42,7 @@ export function Experience() {
         position={[100, 100, 100]}
       />
 
-      <Box position={[0, 0, 0]} />
+      <Box/>
       <Room />
     </Canvas>
   );

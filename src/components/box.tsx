@@ -1,27 +1,18 @@
 import * as React from 'react';
-import { useRef, useState } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { Float, FloatProps } from '@react-three/drei';
 
-export function Box(props: JSX.IntrinsicElements['mesh']) {
-  // This reference will give us direct access to the THREE.Mesh object
-  const ref = useRef<THREE.Mesh>(null!);
-  // Hold state for hovered and clicked events
-  const [hovered, hover] = useState(false);
-  const [clicked, click] = useState(false);
-  // Rotate mesh every frame, this is outside of React without overhead
-  useFrame((state, delta) => (ref.current.rotation.x += 0.01));
-
+export function Box(props: FloatProps) {
   return (
-    <mesh
-      {...props}
-      ref={ref}
-      scale={clicked ? 1.5 : 1}
-      onClick={(event) => click(!clicked)}
-      onPointerOver={(event) => hover(true)}
-      onPointerOut={(event) => hover(false)}
+    <Float
+      speed={1} // Animation speed, defaults to 1
+      rotationIntensity={1} // XYZ rotation intensity, defaults to 1
+      floatIntensity={1} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
+      floatingRange={[-0.5, 0.2]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
     >
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={'#E7AD00'} />
-    </mesh>
+      <mesh>
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color={'#E7AD00'} />
+      </mesh>
+    </Float>
   );
 }
