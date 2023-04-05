@@ -21,7 +21,7 @@ export function Box(props: JSX.IntrinsicElements['mesh']) {
       onPointerOut={(event) => hover(false)}
     >
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      <meshStandardMaterial color={'#E7AD00'} />
     </mesh>
   );
 }

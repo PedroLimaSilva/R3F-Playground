@@ -1,25 +1,39 @@
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 import * as React from 'react';
+
 import { Box } from './components/box';
 import { Room } from './components/Room';
 
 export function Experience() {
   return (
-    <>
-      <Perf position='top-left' />
+    <Canvas
+      flat
+      orthographic
+      camera={{
+        fov: 45,
+        near: 0.01,
+        far: 200,
+        zoom: 100,
+        position: [0, 20, 100],
+      }}
+    >
+      {process.env.environment !== 'VERCEL' && <Perf position='top-left' />}
 
       <OrbitControls
         makeDefault
-        maxDistance={15}
-        minDistance={5}
+        maxZoom={200}
+        minZoom={75}
+        // maxDistance={1}
+        // minDistance={1}
         enablePan={false}
         maxPolarAngle={Math.PI / 2}
         maxAzimuthAngle={Math.PI / 4}
         minAzimuthAngle={-Math.PI / 4}
       />
 
-      <ambientLight intensity={0.3} />
+      <ambientLight intensity={0.5} />
       <pointLight
         castShadow
         shadow-mapSize-height={512}
@@ -28,9 +42,8 @@ export function Experience() {
         position={[100, 100, 100]}
       />
 
-      <Box position={[-1.2, 0, 0]} />
-      <Box position={[1.2, 0, 0]} />
+      <Box position={[0, 0, 0]} />
       <Room />
-    </>
+    </Canvas>
   );
 }

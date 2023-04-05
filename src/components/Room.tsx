@@ -5,30 +5,22 @@ import React from 'react';
 import { useGLTF, useTexture } from '@react-three/drei';
 
 export function Room(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials } = useGLTF('/model/cubes_mesh_simple.glb') as any;
+  const { nodes } = useGLTF('/model/cubes_mesh_simple.glb') as any;
   const bakedTexture = useTexture('/model/cubes_simple_2048.jpg');
   bakedTexture.flipY = false;
 
   return (
-    <group
-      {...props}
-      dispose={null}
-      rotation={[0, -Math.PI / 4, 0]}
-      scale={2.5}
-    >
+    <group {...props} dispose={null} rotation={[0, Math.PI / 4, 0]} scale={2.5}>
       <mesh
         castShadow
         receiveShadow
         // material={materials.Material}
         geometry={nodes.Plane.geometry}
-        position={[0, 5, 0]}
-        rotation={[0, Math.PI / 2, 0]}
       >
-        {/* <meshPhysicalMaterial color={'hotpink'} /> */}
         <meshBasicMaterial map={bakedTexture} />
       </mesh>
     </group>
   );
 }
 
-useGLTF.preload('/model/cubes_mesh.glb');
+useGLTF.preload('/model/cubes_mesh_simple.glb');
