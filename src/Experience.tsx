@@ -1,12 +1,28 @@
+import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Float, OrbitControls } from '@react-three/drei';
+import { Bounds, Float, OrbitControls } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
-import * as React from 'react';
 
 import { Box } from './components/box';
 import { Room } from './components/Room';
+import { PointOfInterest } from './components/PointOfInterest';
+
+const POINTS_OF_INTEREST: Array<{
+  position: [number, number, number];
+  margin: number;
+}> = [
+  { position: [0, 0, 0], margin: 1.5 },
+  { position: [1, 0, 1], margin: 1.5 },
+  { position: [-1, 0, -1], margin: 1.5 },
+  { position: [1, 1, 0], margin: 1.5 },
+  { position: [0, 1, -1], margin: 1.5 },
+  { position: [-1, -1, 0], margin: 1.5 },
+  { position: [0, -1, 1], margin: 1.5 },
+];
 
 export function Experience() {
+  const [focusedPOI, focusPOI] = useState(0);
+
   return (
     <Canvas
       flat
@@ -42,7 +58,24 @@ export function Experience() {
         position={[100, 100, 100]}
       />
 
-      <Box/>
+      <group rotation={[0, Math.PI / 4, 0]} scale={2.75}>
+        {POINTS_OF_INTEREST.map((poi, index) => (
+          <Bounds
+            fit={focusedPOI === index}
+            key={`POI:${index}`}
+            clip
+            observe
+            margin={poi.margin}
+          >
+            <PointOfInterest
+              position={poi.position}
+              onClick={() => focusPOI(index)}
+            />
+          </Bounds>
+        ))}
+      </group>
+
+      <Box />
       <Room />
     </Canvas>
   );
