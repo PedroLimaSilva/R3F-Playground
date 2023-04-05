@@ -15,11 +15,14 @@ console.log(process.env, isPreview);
 const POINTS_OF_INTEREST: Array<{
   position: [number, number, number];
   margin: number;
+  scale?: number;
+  childOf?: number[];
 }> = [
   { position: [0, 0, 0], margin: 1.5 },
   { position: [1, 0, 1], margin: 1.5 },
   { position: [-1, 0, -1], margin: 1.5 },
   { position: [1, 1, 0], margin: 1.5 },
+  { position: [1, 1, 0], margin: 1.5, scale: 0.5, childOf: [3] },
   { position: [0, 1, -1], margin: 1.5 },
   { position: [-1, -1, 0], margin: 1.5 },
   { position: [0, -1, 1], margin: 1.5 },
@@ -74,7 +77,15 @@ export function Experience() {
           >
             <PointOfInterest
               position={poi.position}
-              onClick={() => focusPOI(index)}
+              scale={poi.scale === undefined ? 1 : poi.scale}
+              onClick={() => {
+                if (
+                  focusedPOI !== index &&
+                  !POINTS_OF_INTEREST[focusedPOI].childOf?.includes(index)
+                ) {
+                  focusPOI(index);
+                }
+              }}
             />
           </Bounds>
         ))}
