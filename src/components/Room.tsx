@@ -8,19 +8,25 @@ export function Room(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/model/cubes_mesh_simple.glb') as any;
   const bgTexture = useTexture('/model/overlapping_cubes.png');
   bgTexture.flipY = false;
-  const centerTexture = useTexture('/model/cubes_center_2048.jpg');
+  const centerTexture = useTexture('/model/center_cubes_512.jpg');
   centerTexture.flipY = false;
+  const livingRoomTexture = useTexture('/model/living_room_512.jpg');
+  livingRoomTexture.flipY = false;
+  const centerCubeTexture = useTexture('/model/center_cube_512.jpg');
+  centerCubeTexture.flipY = false;
 
   return (
     <group {...props} dispose={null} scale={2.5}>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Plane.geometry}
-      >
+      <mesh receiveShadow geometry={nodes.Plane.geometry}>
         <meshBasicMaterial map={bgTexture} />
       </mesh>
-      <mesh geometry={nodes.Center.geometry}>
+      <mesh receiveShadow geometry={nodes.Center001.geometry}>
+        <meshBasicMaterial map={livingRoomTexture} />
+      </mesh>
+      <mesh receiveShadow geometry={nodes.Center002.geometry}>
+        <meshBasicMaterial map={centerCubeTexture} />
+      </mesh>
+      <mesh receiveShadow geometry={nodes.Center.geometry}>
         <meshBasicMaterial map={centerTexture} />
       </mesh>
     </group>
