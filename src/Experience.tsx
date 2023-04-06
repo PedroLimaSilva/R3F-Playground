@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Bounds, Float, OrbitControls } from '@react-three/drei';
+import { Bounds, OrbitControls } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 
 import { Box } from './components/box';
@@ -10,7 +10,6 @@ import { PointOfInterest } from './components/PointOfInterest';
 const isPreview =
   process.env.NODE_ENV !== 'production' ||
   process.env.REACT_APP_VERCEL_ENV === 'preview';
-console.log(process.env, isPreview);
 
 const POINTS_OF_INTEREST: Array<{
   position: [number, number, number];
@@ -24,6 +23,7 @@ const POINTS_OF_INTEREST: Array<{
   { position: [1, 1, 0], margin: 1.5 },
   { position: [1, 1, 0], margin: 1.5, scale: 0.5, childOf: [3] },
   { position: [0, 1, -1], margin: 1.5 },
+  { position: [0, 1, -1], margin: 1.5, scale: 0.5, childOf: [5] },
   { position: [-1, -1, 0], margin: 1.5 },
   { position: [0, -1, 1], margin: 1.5 },
 ];
@@ -65,7 +65,6 @@ export function Experience() {
         intensity={0.8}
         position={[100, 100, 100]}
       />
-
       <group rotation={[0, Math.PI / 4, 0]} scale={2.75}>
         {POINTS_OF_INTEREST.map((poi, index) => (
           <Bounds
