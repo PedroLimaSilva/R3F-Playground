@@ -7,6 +7,8 @@ import { Box } from './components/box';
 import { Room } from './components/Room';
 import { PointOfInterest } from './components/PointOfInterest';
 
+import { AvMatoran } from './models/AvMatoran';
+
 const isPreview =
   process.env.NODE_ENV !== 'production' ||
   process.env.REACT_APP_VERCEL_ENV === 'preview';
@@ -47,14 +49,14 @@ export function Experience() {
 
       <OrbitControls
         makeDefault
-        maxZoom={200}
-        minZoom={75}
+        // maxZoom={500}
+        // minZoom={75}
         // maxDistance={1}
         // minDistance={1}
-        enablePan={false}
-        maxPolarAngle={Math.PI / 2}
-        maxAzimuthAngle={Math.PI / 4}
-        minAzimuthAngle={-Math.PI / 4}
+        enablePan={isPreview}
+        // maxPolarAngle={Math.PI / 2}
+        // maxAzimuthAngle={Math.PI / 4}
+        // minAzimuthAngle={-Math.PI / 4}
       />
 
       <ambientLight intensity={0.5} />
@@ -65,7 +67,7 @@ export function Experience() {
         intensity={0.8}
         position={[100, 100, 100]}
       />
-      <group rotation={[0, Math.PI / 4, 0]} scale={2.75}>
+      {/* <group rotation={[0, Math.PI / 4, 0]} scale={2.75}>
         {POINTS_OF_INTEREST.map((poi, index) => (
           <Bounds
             fit={focusedPOI === index}
@@ -88,10 +90,13 @@ export function Experience() {
             />
           </Bounds>
         ))}
-      </group>
+      </group> */}
 
-      <Box />
-      <Room />
+      {/* <Box />
+      <Room /> */}
+      <Bounds fit key={`POI:Matoran`} clip observe margin={1.5}>
+        <AvMatoran />
+      </Bounds>
     </Canvas>
   );
 }
