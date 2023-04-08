@@ -43,9 +43,6 @@ export function AvMatoran(props: JSX.IntrinsicElements['group']) {
 
   return (
     <group {...props} dispose={null}>
-      <mesh castShadow geometry={nodes.Miru.geometry}>
-        {goldMaterial}
-      </mesh>
       <mesh castShadow geometry={nodes.LLeg.geometry}>
         {goldMaterial}
       </mesh>
@@ -61,15 +58,20 @@ export function AvMatoran(props: JSX.IntrinsicElements['group']) {
       <mesh castShadow geometry={nodes.Torso.geometry}>
         {whiteMaterial}
       </mesh>
-      <mesh castShadow geometry={nodes.Kakama.geometry}>
-        {goldMaterial}
-      </mesh>
       <mesh castShadow geometry={nodes.Face.geometry}>
         {grayMaterial}
       </mesh>
       <mesh castShadow geometry={nodes.Pakari.geometry}>
         {goldMaterial}
       </mesh>
+      {/* 
+      <mesh castShadow geometry={nodes.Miru.geometry}>
+        {goldMaterial}
+      </mesh>
+      <mesh castShadow geometry={nodes.Kakama.geometry}>
+        {goldMaterial}
+      </mesh>
+      */}
     </group>
   );
 }
