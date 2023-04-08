@@ -6,6 +6,7 @@ import { useGLTF, useTexture } from '@react-three/drei';
 
 export function Room(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/model/cubes_mesh_simple.glb') as any;
+
   const bgTexture = useTexture('/model/overlapping_cubes.png');
   bgTexture.flipY = false;
   const centerTexture = useTexture('/model/center_cubes_512.jpg');
@@ -16,7 +17,7 @@ export function Room(props: JSX.IntrinsicElements['group']) {
   centerCubeTexture.flipY = false;
 
   return (
-    <group {...props} dispose={null} scale={2.5}>
+    <group {...props} dispose={null}>
       <mesh receiveShadow geometry={nodes.Plane.geometry}>
         <meshBasicMaterial map={bgTexture} />
       </mesh>
