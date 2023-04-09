@@ -89,7 +89,7 @@ export function Background(props: JSX.IntrinsicElements['group']) {
   ));
 
   return (
-    <group {...props} dispose={null} position={[0, 0.5, 0]}>
+    <group {...props} dispose={null}>
       {mesh}
     </group>
   );

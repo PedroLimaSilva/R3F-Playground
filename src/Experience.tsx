@@ -4,19 +4,12 @@ import { Bounds, OrbitControls } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 
 import { Box } from './components/box';
-import { Room } from './models/Room';
 import { PointOfInterest } from './components/PointOfInterest';
 
 import { AvMatoran } from './models/AvMatoran';
 import { LivingRoom } from './models/LivingRoom';
-import { BGCenter } from './models/BGCenter';
 import { Background } from './models/Background';
-
-const isPreview =
-  process.env.NODE_ENV !== 'production' ||
-  process.env.REACT_APP_VERCEL_ENV === 'preview';
-
-console.log(isPreview);
+import { isPreview } from './environment';
 
 const POINTS_OF_INTEREST: Array<{
   position: [number, number, number];
@@ -72,8 +65,8 @@ export function Experience() {
         intensity={0.8}
         position={[100, 100, 100]}
       />
-      <group scale={2.75} rotation={[0, Math.PI / 4, 0]}>
-        {/* <group rotation={[0, Math.PI / 4, 0]}>
+      <group rotation={[0, Math.PI / 4, 0]}>
+        <group>
           {POINTS_OF_INTEREST.map((poi, index) => (
             <Bounds
               fit={focusedPOI === index}
@@ -96,15 +89,15 @@ export function Experience() {
               />
             </Bounds>
           ))}
-        </group> */}
-        <Box scale={0.5} position={[0, 0.5, 0]} />
-        {/* <Room scale={2.5} rotation={[0, -Math.PI / 4, 0]} /> */}
-        <Bounds fit key={`POI:LivingRoom`} clip observe margin={1.5}>
-          <LivingRoom position={[0, 1, -1]} />
-        </Bounds>
+        </group>
+        <Box scale={0.5} position={[0, 0, 0]} />
+        <LivingRoom position={[0, 0.5, -1]} />
         <Background />
-        {/* <BGCenter /> */}
-        {/* <AvMatoran position={[2.75, -2.75 / 2, 2.75]} rotation={[0, -Math.PI / 4, 0]}/> */}
+        <AvMatoran
+          position={[1, -0.5, 1]}
+          rotation={[0, -Math.PI / 4, 0]}
+          scale={0.5}
+        />
       </group>
     </Canvas>
   );
