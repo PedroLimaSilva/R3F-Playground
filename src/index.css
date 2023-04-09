@@ -12,5 +12,6 @@ body,
 }
 
 body {
-  background: linear-gradient(to right, #989898, #d7d7d7);
+  /* background: linear-gradient(to right, #989898, #d7d7d7); */
+  background: #333;
 }

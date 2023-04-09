@@ -4,14 +4,12 @@ import { Bounds, OrbitControls } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 
 import { Box } from './components/box';
-import { Room } from './components/Room';
 import { PointOfInterest } from './components/PointOfInterest';
 
 import { AvMatoran } from './models/AvMatoran';
-
-const isPreview =
-  process.env.NODE_ENV !== 'production' ||
-  process.env.REACT_APP_VERCEL_ENV === 'preview';
+import { LivingRoom } from './models/LivingRoom';
+import { Background } from './models/Background';
+import { isPreview } from './environment';
 
 const POINTS_OF_INTEREST: Array<{
   position: [number, number, number];
@@ -20,7 +18,7 @@ const POINTS_OF_INTEREST: Array<{
   childOf?: number[];
 }> = [
   { position: [0, 0, 0], margin: 1.5 },
-  { position: [1, -0.25, 1], margin: 1.5, scale:0.5 },
+  { position: [1, -0.25, 1], margin: 1.5, scale: 0.5 },
   { position: [-1, 0, -1], margin: 1.5 },
   { position: [1, 1, 0], margin: 1.5 },
   { position: [1, 1, 0], margin: 1.5, scale: 0.5, childOf: [3] },
@@ -50,7 +48,7 @@ export function Experience() {
       <OrbitControls
         makeDefault
         maxZoom={500}
-        minZoom={75}
+        minZoom={isPreview ? 0 : 75}
         // maxDistance={1}
         // minDistance={1}
         enablePan={isPreview}
@@ -68,7 +66,7 @@ export function Experience() {
         position={[100, 100, 100]}
       />
       <group rotation={[0, Math.PI / 4, 0]}>
-        <group scale={2.75}>
+        <group>
           {POINTS_OF_INTEREST.map((poi, index) => (
             <Bounds
               fit={focusedPOI === index}
@@ -92,9 +90,14 @@ export function Experience() {
             </Bounds>
           ))}
         </group>
-        <Box />
-        <Room scale={2.5} rotation={[0, -Math.PI / 4, 0]} />
-        <AvMatoran position={[2.75, -2.75 / 2, 2.75]} rotation={[0, -Math.PI / 4, 0]}/>
+        <Box scale={0.5} position={[0, 0, 0]} />
+        <LivingRoom position={[0, 0.5, -1]} />
+        <Background />
+        <AvMatoran
+          position={[1, -0.5, 1]}
+          rotation={[0, -Math.PI / 4, 0]}
+          scale={0.5}
+        />
       </group>
     </Canvas>
   );
