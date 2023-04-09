@@ -9,11 +9,14 @@ import { PointOfInterest } from './components/PointOfInterest';
 
 import { AvMatoran } from './models/AvMatoran';
 import { LivingRoom } from './models/LivingRoom';
+import { BGCenter } from './models/BGCenter';
 import { Background } from './models/Background';
 
 const isPreview =
   process.env.NODE_ENV !== 'production' ||
   process.env.REACT_APP_VERCEL_ENV === 'preview';
+
+console.log(isPreview);
 
 const POINTS_OF_INTEREST: Array<{
   position: [number, number, number];
@@ -52,7 +55,7 @@ export function Experience() {
       <OrbitControls
         makeDefault
         maxZoom={500}
-        minZoom={75}
+        minZoom={isPreview ? 0 : 75}
         // maxDistance={1}
         // minDistance={1}
         enablePan={isPreview}
@@ -94,12 +97,13 @@ export function Experience() {
             </Bounds>
           ))}
         </group> */}
-        {/* <Box /> */}
+        <Box scale={0.5} position={[0, 0.5, 0]} />
         {/* <Room scale={2.5} rotation={[0, -Math.PI / 4, 0]} /> */}
         <Bounds fit key={`POI:LivingRoom`} clip observe margin={1.5}>
-          <LivingRoom position={[-0.0001, 1, -0.9999]} />
+          <LivingRoom position={[0, 1, -1]} />
         </Bounds>
         <Background />
+        {/* <BGCenter /> */}
         {/* <AvMatoran position={[2.75, -2.75 / 2, 2.75]} rotation={[0, -Math.PI / 4, 0]}/> */}
       </group>
     </Canvas>
