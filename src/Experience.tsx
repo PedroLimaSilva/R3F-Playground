@@ -4,10 +4,12 @@ import { Bounds, OrbitControls } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 
 import { Box } from './components/box';
-import { Room } from './components/Room';
+import { Room } from './models/Room';
 import { PointOfInterest } from './components/PointOfInterest';
 
 import { AvMatoran } from './models/AvMatoran';
+import { LivingRoom } from './models/LivingRoom';
+import { Background } from './models/Background';
 
 const isPreview =
   process.env.NODE_ENV !== 'production' ||
@@ -20,7 +22,7 @@ const POINTS_OF_INTEREST: Array<{
   childOf?: number[];
 }> = [
   { position: [0, 0, 0], margin: 1.5 },
-  { position: [1, -0.25, 1], margin: 1.5, scale:0.5 },
+  { position: [1, -0.25, 1], margin: 1.5, scale: 0.5 },
   { position: [-1, 0, -1], margin: 1.5 },
   { position: [1, 1, 0], margin: 1.5 },
   { position: [1, 1, 0], margin: 1.5, scale: 0.5, childOf: [3] },
@@ -67,8 +69,8 @@ export function Experience() {
         intensity={0.8}
         position={[100, 100, 100]}
       />
-      <group rotation={[0, Math.PI / 4, 0]}>
-        <group scale={2.75}>
+      <group scale={2.75} rotation={[0, Math.PI / 4, 0]}>
+        {/* <group rotation={[0, Math.PI / 4, 0]}>
           {POINTS_OF_INTEREST.map((poi, index) => (
             <Bounds
               fit={focusedPOI === index}
@@ -91,10 +93,14 @@ export function Experience() {
               />
             </Bounds>
           ))}
-        </group>
-        <Box />
-        <Room scale={2.5} rotation={[0, -Math.PI / 4, 0]} />
-        <AvMatoran position={[2.75, -2.75 / 2, 2.75]} rotation={[0, -Math.PI / 4, 0]}/>
+        </group> */}
+        {/* <Box /> */}
+        {/* <Room scale={2.5} rotation={[0, -Math.PI / 4, 0]} /> */}
+        <Bounds fit key={`POI:LivingRoom`} clip observe margin={1.5}>
+          <LivingRoom position={[-0.0001, 1, -0.9999]} />
+        </Bounds>
+        <Background />
+        {/* <AvMatoran position={[2.75, -2.75 / 2, 2.75]} rotation={[0, -Math.PI / 4, 0]}/> */}
       </group>
     </Canvas>
   );
