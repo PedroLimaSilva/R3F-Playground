@@ -47,7 +47,7 @@ export function Experience() {
 
       <OrbitControls
         makeDefault
-        maxZoom={500}
+        maxZoom={2250}
         minZoom={isPreview ? 0 : 75}
         // maxDistance={1}
         // minDistance={1}
