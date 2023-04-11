@@ -11,31 +11,35 @@ export function LivingRoom(props: JSX.IntrinsicElements['group']) {
     <group {...props} dispose={null}>
       <mesh
         geometry={nodes.TV_Baked.geometry}
-        material={materials.MergedBake_Baked}
+        material={materials.livingRoom_Baked}
       />
       <mesh
         geometry={nodes.Xbox_Baked.geometry}
-        material={materials.MergedBake_Baked}
+        material={materials.livingRoom_Baked}
       />
       <mesh
         geometry={nodes.Sofa_Baked.geometry}
-        material={materials.MergedBake_Baked}
+        material={materials.livingRoom_Baked}
       />
       <mesh
         geometry={nodes.TV_Cabinet_Baked.geometry}
-        material={materials.MergedBake_Baked}
+        material={materials.livingRoom_Baked}
       />
       <mesh
-        material={materials.MergedBake_Baked}
+        material={materials.livingRoom_Baked}
         geometry={nodes.Walls_Baked.geometry}
       />
       <mesh
-        material={materials.MergedBake_Baked}
+        material={materials.livingRoom_Baked}
         geometry={nodes.Door_Baked.geometry}
       />
       <mesh
-        material={materials.MergedBake_Baked}
+        material={materials.livingRoom_Baked}
         geometry={nodes.Planks_Baked.geometry}
+      />
+      <mesh
+        material={materials.livingRoom_Baked}
+        geometry={nodes.Foundation_Baked.geometry}
       />
     </group>
   );
