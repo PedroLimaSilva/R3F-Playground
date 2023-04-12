@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 html,
@@ -14,4 +15,18 @@ body,
 body {
   /* background: linear-gradient(to right, #989898, #d7d7d7); */
   background: #333;
+}
+
+.annotation {
+  transition: all 0.5s ease-in-out;
+  line-break: auto;
+  overflow: hidden;
+  pointer-events: none;
+  font-size: 8px;
+  font-weight: 300;
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 0.2em;
+  border-radius: 1.2em;
+  background-color: rgba(55,55,55,0.5);
 }
