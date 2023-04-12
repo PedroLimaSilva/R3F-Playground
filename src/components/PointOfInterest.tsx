@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import { isPreview } from '../environment';
 
 export function PointOfInterest(props: JSX.IntrinsicElements['mesh']) {
