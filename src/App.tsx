@@ -1,8 +1,16 @@
 /* eslint-disable */
 import * as THREE from 'three';
 import * as React from 'react';
-import { Experience } from './Experience';
+import { experienceIndex } from './environment';
+import { CubesStairs } from './experiences/CubesStairs';
+import { Pilar } from './experiences/Pilar';
 
 export default function App() {
-  return <Experience />;
+  switch (experienceIndex) {
+    case 0:
+      return <CubesStairs />;
+    default:
+      return <Pilar />;
+  }
+  return null;
 }
