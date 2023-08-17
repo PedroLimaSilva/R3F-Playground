@@ -4,7 +4,7 @@ import * as React from 'react';
 import { experienceIndex } from './environment';
 import { CubesStairs } from './experiences/CubesStairs';
 import { Pilar } from './experiences/Pilar';
-import { Character } from './experiences/Character';
+import { CharacterExperience } from './experiences/CharacterExperience';
 
 export default function App() {
   switch (experienceIndex) {
@@ -13,7 +13,7 @@ export default function App() {
     case 1:
       return <Pilar />;
     default:
-      return <Character />;
+      return <CharacterExperience />;
   }
   return null;
 }

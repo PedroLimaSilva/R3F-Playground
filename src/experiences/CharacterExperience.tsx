@@ -6,7 +6,7 @@ import { Perf } from 'r3f-perf';
 import { isPreview } from '../environment';
 import { ReadyPlayerMe } from '../models/ReadyPlayerMe';
 
-export function Character() {
+export function CharacterExperience() {
   return (
     <>
       <Canvas
