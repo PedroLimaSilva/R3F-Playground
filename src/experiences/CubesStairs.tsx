@@ -11,6 +11,7 @@ import { Background } from '../models/Background';
 import { isPreview } from '../environment';
 import { Hogwarts } from '../models/Hogwarts';
 import { ReadyPlayerMe } from '../models/ReadyPlayerMe';
+import { Landing } from '../models/Landing';
 
 const POINTS_OF_INTEREST: Array<{
   externalGeometry?: boolean;
@@ -74,6 +75,7 @@ export function CubesStairs() {
       />
       <group rotation={[0, Math.PI / 4, 0]}>
         <Background />
+        <Landing position={[0, -0.5, 0]} />
         <ReadyPlayerMe
           position={[0, -0.5, 0]}
           scale={0.35}
