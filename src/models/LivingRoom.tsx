@@ -18,7 +18,25 @@ export function LivingRoom(props: JSX.IntrinsicElements['group']) {
         geometry={nodes.Xbox_Baked.geometry}
         material={materials.livingRoom_Baked}
       >
-        <Annotation position={[0, 0.35, -0.49]} scale={0.25}>This is an XBox</Annotation>
+        <Annotation position={[-1, 0.5, -0.49]} scale={0.25}>
+          <h2>Sky</h2>
+          <h3>September 2018 - Present</h3>
+          <sub>Frontend Developer</sub>
+          <section>
+            <h4>Sky Q - Sky X</h4>
+            <p>
+              A multi-screen, multi-proposition, multi-territory SmartTV app to
+              access Sky content.
+            </p>
+          </section>
+          <section>
+            <h4>Peacock - SkyShowtime - Showmax</h4>
+            <p>
+              A fully featured streaming application. Worked on the SmartTV,
+              Console and STB clients.
+            </p>
+          </section>
+        </Annotation>
       </mesh>
       <mesh
         geometry={nodes.Sofa_Baked.geometry}
