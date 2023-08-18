@@ -10,8 +10,7 @@ import { LivingRoom } from '../models/LivingRoom';
 import { Background } from '../models/Background';
 import { isPreview } from '../environment';
 import { Hogwarts } from '../models/Hogwarts';
-import { ReadyPlayerMe } from '../models/ReadyPlayerMe';
-import { Landing } from '../models/Landing';
+import { MainCharacter } from '../models/MainCharacter';
 
 const POINTS_OF_INTEREST: Array<{
   externalGeometry?: boolean;
@@ -19,18 +18,37 @@ const POINTS_OF_INTEREST: Array<{
   margin: number;
   scale?: number;
   childOf?: number[];
+  model?: JSX.Element;
 }> = [
-  { position: [0, 0, 0], margin: 1.5 },
+  {
+    position: [0, 0, 0],
+    margin: 1.5,
+    model: <MainCharacter position={[0, -0.5, 0]} />,
+  },
   { position: [1, -0.25, 1], margin: 1.5, scale: 0.5 },
   { position: [-1, 0, -1], margin: 1.5 },
-  { position: [1, 1, 0], externalGeometry: true, margin: 0.5 },
-  { externalGeometry: true, position: [0, 1, -1], margin: 1.5 },
   {
-    externalGeometry: true,
+    position: [1, 1, 0],
+    margin: 0.5,
+    model: <Hogwarts position={[1, 0.5, 0]} />,
+  },
+  {
+    position: [0, 1, -1],
+    margin: 1.5,
+    model: <LivingRoom position={[0, 0.5, -1]} />,
+  },
+  {
+    externalGeometry: false,
     position: [0, 1, -1],
     margin: 1.5,
     scale: 0.5,
-    childOf: [5],
+    model: (
+      <AvMatoran
+        position={[1, -0.5, 1]}
+        rotation={[0, -Math.PI / 4, 0]}
+        scale={0.5}
+      />
+    ),
   },
   { position: [-1, -1, 0], margin: 1.5 },
   { position: [0, -1, 1], margin: 1.5 },
@@ -75,37 +93,6 @@ export function CubesStairs() {
       />
       <group rotation={[0, Math.PI / 4, 0]}>
         <Background />
-        <Landing position={[0, -0.5, 0]} />
-        <ReadyPlayerMe
-          position={[0, -0.5, 0]}
-          scale={0.35}
-          rotation={[0, -Math.PI / 4, 0]}
-        />
-        <Bounds
-          fit={focusedPOI === 4}
-          key={`POI:${4}`}
-          clip
-          observe
-          margin={POINTS_OF_INTEREST[4].margin}
-        >
-          <LivingRoom position={[0, 0.5, -1]} onClick={() => focusPOI(4)} />
-        </Bounds>
-
-        <AvMatoran
-          position={[1, -0.5, 1]}
-          rotation={[0, -Math.PI / 4, 0]}
-          scale={0.5}
-        />
-
-        <Bounds
-          fit={focusedPOI === 3}
-          key={`POI:${3}`}
-          clip
-          observe
-          margin={POINTS_OF_INTEREST[3].margin}
-        >
-          <Hogwarts position={[1, 0.5, 0]} onClick={() => focusPOI(3)} />
-        </Bounds>
 
         <group>
           {POINTS_OF_INTEREST.map((poi, index) => (
@@ -130,6 +117,7 @@ export function CubesStairs() {
                       }
                     }}
                   />
+                  {poi.model}
                 </Bounds>
               )}
             </>
