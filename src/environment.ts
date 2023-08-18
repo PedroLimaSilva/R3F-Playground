@@ -4,4 +4,4 @@ export const isPreview =
 
 const N_EXPERIENCES = 1;
 
-export const experienceIndex: number = 2; // Date.now() % N_EXPERIENCES;
+export const experienceIndex: number = 0; // Date.now() % N_EXPERIENCES;
