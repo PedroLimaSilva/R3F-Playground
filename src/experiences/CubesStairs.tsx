@@ -13,7 +13,7 @@ import { Hogwarts } from '../models/Hogwarts';
 import { MainCharacter } from '../models/MainCharacter';
 
 const POINTS_OF_INTEREST: Array<{
-  externalGeometry?: boolean;
+  key: string;
   position: [number, number, number];
   margin: number;
   scale?: number;
@@ -21,25 +21,14 @@ const POINTS_OF_INTEREST: Array<{
   model?: JSX.Element;
 }> = [
   {
+    key: 'MainCharacter',
     position: [0, 0, 0],
     margin: 1.5,
     model: <MainCharacter position={[0, -0.5, 0]} />,
   },
-  { position: [1, -0.25, 1], margin: 1.5, scale: 0.5 },
-  { position: [-1, 0, -1], margin: 1.5 },
   {
-    position: [1, 1, 0],
-    margin: 0.5,
-    model: <Hogwarts position={[1, 0.5, 0]} />,
-  },
-  {
-    position: [0, 1, -1],
-    margin: 1.5,
-    model: <LivingRoom position={[0, 0.5, -1]} />,
-  },
-  {
-    externalGeometry: false,
-    position: [0, 1, -1],
+    key: 'Bionicle',
+    position: [1, -0.25, 1],
     margin: 1.5,
     scale: 0.5,
     model: (
@@ -50,12 +39,29 @@ const POINTS_OF_INTEREST: Array<{
       />
     ),
   },
-  { position: [-1, -1, 0], margin: 1.5 },
-  { position: [0, -1, 1], margin: 1.5 },
+  {
+    key: `Undecided ${[-1, 0, -1]}`,
+    position: [-1, 0, -1],
+    margin: 1.5,
+  },
+  {
+    key: 'Hogwarts',
+    position: [1, 1, 0],
+    margin: 0.5,
+    model: <Hogwarts position={[1, 0.5, 0]} />,
+  },
+  {
+    key: 'LivingRoom',
+    position: [0, 1, -1],
+    margin: 1.5,
+    model: <LivingRoom position={[0, 0.5, -1]} />,
+  },
+  { key: `Undecided ${[-1, -1, 0]}`, position: [-1, -1, 0], margin: 1.5 },
+  { key: `Undecided ${[0, -1, 1]}`, position: [0, -1, 1], margin: 1.5 },
 ];
 
 export function CubesStairs() {
-  const [focusedPOI, focusPOI] = useState(0);
+  const [focusedPOI, focusPOI] = useState(POINTS_OF_INTEREST[0].key);
 
   return (
     <Canvas
@@ -95,32 +101,25 @@ export function CubesStairs() {
         <Background />
 
         <group>
-          {POINTS_OF_INTEREST.map((poi, index) => (
-            <>
-              {poi.externalGeometry ? null : (
-                <Bounds
-                  fit={focusedPOI === index}
-                  key={`POI:${index}`}
-                  clip
-                  observe
-                  margin={poi.margin}
-                >
-                  <PointOfInterest
-                    position={poi.position}
-                    scale={poi.scale === undefined ? 1 : poi.scale}
-                    onClick={() => {
-                      if (
-                        focusedPOI !== index &&
-                        !POINTS_OF_INTEREST[focusedPOI].childOf?.includes(index)
-                      ) {
-                        focusPOI(index);
-                      }
-                    }}
-                  />
-                  {poi.model}
-                </Bounds>
-              )}
-            </>
+          {POINTS_OF_INTEREST.map((poi) => (
+            <Bounds
+              fit={focusedPOI === poi.key}
+              key={`POI:${poi.key}`}
+              clip
+              observe
+              margin={poi.margin}
+            >
+              <PointOfInterest
+                position={poi.position}
+                scale={poi.scale === undefined ? 1 : poi.scale}
+                onClick={() => {
+                  if (focusedPOI !== poi.key) {
+                    focusPOI(poi.key);
+                  }
+                }}
+              />
+              {poi.model}
+            </Bounds>
           ))}
         </group>
       </group>
