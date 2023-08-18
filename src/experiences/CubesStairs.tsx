@@ -56,7 +56,7 @@ export function CubesStairs() {
       <OrbitControls
         makeDefault
         maxZoom={2250}
-        minZoom={isPreview ? 0 : 150}
+        minZoom={isPreview ? 0 : 250}
         // maxDistance={1}
         // minDistance={1}
         enablePan={isPreview}
