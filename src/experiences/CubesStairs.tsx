@@ -10,7 +10,8 @@ import { LivingRoom } from '../models/LivingRoom';
 import { Background } from '../models/Background';
 import { isPreview } from '../environment';
 import { Hogwarts } from '../models/Hogwarts';
-import { FloatingCube } from '../models/FloatingCube';
+import { ReadyPlayerMe } from '../models/ReadyPlayerMe';
+import { Landing } from '../models/Landing';
 
 const POINTS_OF_INTEREST: Array<{
   externalGeometry?: boolean;
@@ -55,7 +56,7 @@ export function CubesStairs() {
       <OrbitControls
         makeDefault
         maxZoom={2250}
-        minZoom={isPreview ? 0 : 150}
+        minZoom={isPreview ? 0 : 250}
         // maxDistance={1}
         // minDistance={1}
         enablePan={isPreview}
@@ -74,7 +75,12 @@ export function CubesStairs() {
       />
       <group rotation={[0, Math.PI / 4, 0]}>
         <Background />
-        <FloatingCube />
+        <Landing position={[0, -0.5, 0]} />
+        <ReadyPlayerMe
+          position={[0, -0.5, 0]}
+          scale={0.35}
+          rotation={[0, -Math.PI / 4, 0]}
+        />
         <Bounds
           fit={focusedPOI === 4}
           key={`POI:${4}`}
