@@ -11,6 +11,7 @@ import { Background } from '../models/Background';
 import { isPreview } from '../environment';
 import { Hogwarts } from '../models/Hogwarts';
 import { MainCharacter } from '../models/MainCharacter';
+import { Robot } from '../models/Robot';
 
 const POINTS_OF_INTEREST: Array<{
   key: string;
@@ -22,42 +23,42 @@ const POINTS_OF_INTEREST: Array<{
 }> = [
   {
     key: 'MainCharacter',
-    position: [0, 0, 0],
+    position: [0, 0.5, 0],
     margin: 1.5,
-    model: <MainCharacter position={[0, -0.5, 0]} />,
+    model: <MainCharacter position={[0, 0, 0]} />,
   },
   {
     key: 'Bionicle',
-    position: [1, -0.25, 1],
+    position: [1, 0.25, 1],
     margin: 1.5,
     scale: 0.5,
     model: (
       <AvMatoran
-        position={[1, -0.5, 1]}
+        position={[1, 0, 1]}
         rotation={[0, -Math.PI / 4, 0]}
         scale={0.5}
       />
     ),
   },
   {
-    key: `Undecided ${[-1, 0, -1]}`,
-    position: [-1, 0, -1],
+    key: `Undecided ${[-1, 0.5, -1]}`,
+    position: [-1, 0.5, -1],
     margin: 1.5,
   },
   {
     key: 'Hogwarts',
-    position: [1, 1, 0],
+    position: [1, 1.5, 0],
     margin: 0.5,
-    model: <Hogwarts position={[1, 0.5, 0]} />,
+    model: <Hogwarts position={[1, 1, 0]} />,
   },
   {
     key: 'LivingRoom',
-    position: [0, 1, -1],
+    position: [0, 1.5, -1],
     margin: 1.5,
-    model: <LivingRoom position={[0, 0.5, -1]} />,
+    model: <LivingRoom position={[0, 1, -1]} />,
   },
-  { key: `Undecided ${[-1, -1, 0]}`, position: [-1, -1, 0], margin: 1.5 },
-  { key: `Undecided ${[0, -1, 1]}`, position: [0, -1, 1], margin: 1.5 },
+  { key: `Undecided ${[-1, -0.5, 0]}`, position: [-1, -0.5, 0], margin: 1.5 },
+  { key: `Undecided ${[0, -0.5, 1]}`, position: [0, -0.5, 1], margin: 1.5 },
 ];
 
 export function CubesStairs() {
@@ -99,6 +100,8 @@ export function CubesStairs() {
       />
       <group rotation={[0, Math.PI / 4, 0]}>
         <Background />
+
+        <Robot />
 
         <group>
           {POINTS_OF_INTEREST.map((poi) => (

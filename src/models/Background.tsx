@@ -82,7 +82,7 @@ export function Background(props: JSX.IntrinsicElements['group']) {
   const mesh = POSITIONS.map((pos) => (
     <mesh
       key={`BG:${pos.toString()}`}
-      position={pos}
+      position={[pos[0], pos[1] + 0.5, pos[2]]}
       geometry={nodes.Cube001_Baked.geometry}
       material={materials.BackgroundInstance_Baked}
     />
