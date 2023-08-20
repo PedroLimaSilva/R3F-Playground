@@ -52,7 +52,7 @@ export function Robot(props: JSX.IntrinsicElements['group']) {
         geometry={nodes.Shadow.geometry}
         material={materials['Material.003']}
         position={[0, 0.029, 0]}
-        scale={1.374}
+        scale={1.1}
       />
     </group>
   );
