@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Bounds, OrbitControls } from '@react-three/drei';
+import { AdaptiveDpr, Bounds, OrbitControls } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 
 import { PointOfInterest } from '../components/PointOfInterest';
@@ -77,7 +77,7 @@ export function CubesStairs() {
       }}
     >
       {isPreview && <Perf position="top-left" />}
-
+      <AdaptiveDpr pixelated />
       <OrbitControls
         makeDefault
         maxZoom={2250}

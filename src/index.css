@@ -3,6 +3,11 @@
   --navbar-background: rgba(230, 230, 230, 0.1);
 }
 
+canvas + div .top-left {
+  /* Fix performance behind scene */
+  z-index: 9999999999;
+}
+
 * {
   box-sizing: border-box;
 }
