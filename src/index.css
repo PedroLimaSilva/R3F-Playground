@@ -1,11 +1,16 @@
+:root {
+  --navbar-height: 60px;
+  --navbar-background: rgba(230, 230, 230, 0.1);
+}
+
 * {
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 html,
 body,
 #root {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 100%;
   height: 100%;
   margin: 0;
@@ -15,6 +20,88 @@ body,
 body {
   /* background: linear-gradient(to right, #989898, #d7d7d7); */
   background: #333;
+}
+
+main {
+  height: 100%;
+  width: 100%;
+}
+
+main > * {
+  z-index: 0;
+}
+
+.NavBar {
+  font-family: 'Roboto Mono', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  z-index: 1;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.NavBar .header {
+  height: var(--navbar-height);
+  background-color: var(--navbar-background);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.NavBar ul {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: var(--navbar-background);
+  backdrop-filter: blur(10px);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.3s ease;
+}
+
+.NavBar.open ul {
+  transform: scaleY(1);
+}
+
+.NavBar li {
+  padding: 0.5em 0.5em;
+  transform: scale(1);
+  cursor: pointer;
+  transition: padding 0.3s ease, transform 0.3s ease;
+}
+
+.NavBar li:hover {
+  transform: scale(1.15);
+  padding: 1em 0.5em;
+}
+
+.delayed-5 {
+  transition-delay: 5s;
+  animation-delay: 5s;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation-name: fade-in;
+  animation-duration: 3s;
+  animation-fill-mode: backwards;
+  animation-timing-function: ease;
 }
 
 .annotation {
@@ -28,5 +115,5 @@ body {
   color: white;
   padding: 0.2em;
   border-radius: 1.2em;
-  background-color: rgba(55,55,55,0.5);
+  background-color: rgba(55, 55, 55, 0.5);
 }
