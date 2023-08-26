@@ -14,7 +14,7 @@ import { Hogwarts } from '../models/Hogwarts';
 import { MainCharacter } from '../models/MainCharacter';
 import { Robot } from '../models/Robot';
 
-const POINTS_OF_INTEREST: Array<{
+export const POINTS_OF_INTEREST: Array<{
   key: string;
   position: [number, number, number];
   margin: number;
@@ -60,9 +60,13 @@ const POINTS_OF_INTEREST: Array<{
   { key: `Undecided ${[-1, -0.5, 0]}`, position: [-1, -0.5, 0], margin: 1.5 },
 ];
 
-export function CubesStairs() {
-  const [focusedPOI, focusPOI] = useState(POINTS_OF_INTEREST[0].key);
-
+export function CubesStairs({
+  focusedPOI,
+  focusPOI,
+}: {
+  focusedPOI: string;
+  focusPOI: React.Dispatch<React.SetStateAction<string>>;
+}) {
   return (
     <>
       <Canvas
