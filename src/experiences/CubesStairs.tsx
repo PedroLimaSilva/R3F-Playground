@@ -7,6 +7,7 @@ import { PointOfInterest } from '../components/PointOfInterest';
 
 import { AvMatoran } from '../models/AvMatoran';
 import { LivingRoom } from '../models/LivingRoom';
+import { Office } from '../models/Office';
 import { Background } from '../models/Background';
 import { isPreview } from '../environment';
 import { Hogwarts } from '../models/Hogwarts';
@@ -28,17 +29,10 @@ const POINTS_OF_INTEREST: Array<{
     model: <MainCharacter position={[0, 0, 0]} />,
   },
   {
-    key: 'Bionicle',
-    position: [1, 0.25, 1],
+    position: [1, 0.5, 1],
+    key: 'Hogwarts',
     margin: 1.5,
-    scale: 0.5,
-    model: (
-      <AvMatoran
-        position={[1, 0, 1]}
-        rotation={[0, -Math.PI / 4, 0]}
-        scale={0.5}
-      />
-    ),
+    model: <Hogwarts position={[1, 0, 1]} />,
   },
   {
     key: `Undecided ${[-1, 0.5, -1]}`,
@@ -46,10 +40,10 @@ const POINTS_OF_INTEREST: Array<{
     margin: 1.5,
   },
   {
-    key: 'Hogwarts',
-    position: [1, 1.5, 0],
-    margin: 0.5,
-    model: <Hogwarts position={[1, 1, 0]} />,
+    position: [0, -0.5, 1],
+    key: 'Bionicle',
+    margin: 1.5,
+    model: <AvMatoran position={[0, -1, 1]} />,
   },
   {
     key: 'LivingRoom',
@@ -57,8 +51,13 @@ const POINTS_OF_INTEREST: Array<{
     margin: 1.5,
     model: <LivingRoom position={[0, 1, -1]} />,
   },
+  {
+    key: 'Office',
+    position: [1, 1.5, 0],
+    margin: 1.5,
+    model: <Office position={[1, 1, 0]} />,
+  },
   { key: `Undecided ${[-1, -0.5, 0]}`, position: [-1, -0.5, 0], margin: 1.5 },
-  { key: `Undecided ${[0, -0.5, 1]}`, position: [0, -0.5, 1], margin: 1.5 },
 ];
 
 export function CubesStairs() {

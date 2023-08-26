@@ -7,6 +7,10 @@ import { useGLTF, useMatcapTexture } from '@react-three/drei';
 
 export function AvMatoran(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/model/avmatoran.glb') as any;
+  const {
+    nodes: { BG002_Baked },
+    materials: { Office_Baked },
+  } = useGLTF('/model/BionicleBG.glb') as any;
 
   /**
    * Golds
@@ -43,37 +47,47 @@ export function AvMatoran(props: JSX.IntrinsicElements['group']) {
 
   return (
     <group {...props} dispose={null}>
-      <mesh castShadow geometry={nodes.LLeg.geometry}>
-        {goldMaterial}
-      </mesh>
-      <mesh castShadow geometry={nodes.RLeg.geometry}>
-        {goldMaterial}
-      </mesh>
-      <mesh castShadow geometry={nodes.RArm.geometry}>
-        {goldMaterial}
-      </mesh>
-      <mesh castShadow geometry={nodes.LArm.geometry}>
-        {goldMaterial}
-      </mesh>
-      <mesh castShadow geometry={nodes.Torso.geometry}>
-        {whiteMaterial}
-      </mesh>
-      <mesh castShadow geometry={nodes.Face.geometry}>
-        {grayMaterial}
-      </mesh>
-      <mesh castShadow geometry={nodes.Pakari.geometry}>
-        {goldMaterial}
-      </mesh>
-      {/* 
+      <mesh
+        name="BG002_Baked"
+        castShadow
+        receiveShadow
+        geometry={BG002_Baked.geometry}
+        material={Office_Baked}
+      />
+      <group rotation={[0, -Math.PI / 4, 0]} scale={0.5}>
+        <mesh castShadow geometry={nodes.LLeg.geometry}>
+          {goldMaterial}
+        </mesh>
+        <mesh castShadow geometry={nodes.RLeg.geometry}>
+          {goldMaterial}
+        </mesh>
+        <mesh castShadow geometry={nodes.RArm.geometry}>
+          {goldMaterial}
+        </mesh>
+        <mesh castShadow geometry={nodes.LArm.geometry}>
+          {goldMaterial}
+        </mesh>
+        <mesh castShadow geometry={nodes.Torso.geometry}>
+          {whiteMaterial}
+        </mesh>
+        <mesh castShadow geometry={nodes.Face.geometry}>
+          {grayMaterial}
+        </mesh>
+        <mesh castShadow geometry={nodes.Pakari.geometry}>
+          {goldMaterial}
+        </mesh>
+        {/* 
       <mesh castShadow geometry={nodes.Miru.geometry}>
-        {goldMaterial}
+      {goldMaterial}
       </mesh>
       <mesh castShadow geometry={nodes.Kakama.geometry}>
-        {goldMaterial}
+      {goldMaterial}
       </mesh>
-      */}
+    */}
+      </group>
     </group>
   );
 }
 
 useGLTF.preload('/model/avmatoran.glb');
+useGLTF.preload('/model/BionicleBG.glb');

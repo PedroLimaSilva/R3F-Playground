@@ -48,6 +48,7 @@ main > * {
 
 .NavBar .header {
   height: var(--navbar-height);
+  padding: 0 0 1em;
   background-color: var(--navbar-background);
   backdrop-filter: blur(10px);
   display: flex;

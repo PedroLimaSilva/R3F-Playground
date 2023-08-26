@@ -6,7 +6,7 @@ import { useGLTF } from '@react-three/drei';
 
 const POSITIONS: Array<[number, number, number]> = [
   // [0, 0, 0], // 0 FloatingCube
-  [1, 0, 1], // R1
+  // [1, 0, 1], // R1 Hogwarts
   [-1, 0, -1], // L1
   [2, 0, 2], // R2
   [-2, 0, -2], // L2
@@ -15,7 +15,7 @@ const POSITIONS: Array<[number, number, number]> = [
   [4, 0, 4], // R4
   [-4, 0, -4], // L4
 
-  // [1, 1, 0], // R1 Hogwarts
+  // [1, 1, 0], // R1 Office
   // [0, 1, -1], // L1 Living Room
   [2, 1, 1], // R2
   [-1, 1, -2], // L2
@@ -24,7 +24,7 @@ const POSITIONS: Array<[number, number, number]> = [
   [4, 1, 3], // R4
   [-3, 1, -4], // L4
 
-  [0, -1, 1], // R1
+  // [0, -1, 1], // R1 Bionicle
   [-1, -1, 0], // L1
   [1, -1, 2], // R2
   [-2, -1, -1], // L2
