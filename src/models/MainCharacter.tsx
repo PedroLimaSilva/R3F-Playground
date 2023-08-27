@@ -14,33 +14,35 @@ export function MainCharacter(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/model/ReadyPlayerMe.glb') as any;
   const { animations } = useGLTF('/model/MaleIdle.glb');
   const { actions } = useAnimations(animations, hips);
+  let trackingTarget: { x: number; y: number; z: number };
 
   useEffect(() => {
     (actions?.['Armature|mixamo.com|Layer0.001'] as AnimationAction).play();
-  });
-
-  let trackingTarget = {
-    x: 0,
-    y: 0,
-    z: 0,
-  };
+    trackingTarget = {
+      x: 0,
+      y: 0,
+      z: 0,
+    };
+  }, []);
 
   useFrame(({ mouse, viewport, camera }) => {
-    const { Head, RightEye, LeftEye } = nodes;
-    const newTarget = {
-      x: ((camera.position.x + mouse.x) * viewport.width) / 2,
-      y: (mouse.y * viewport.height) / 2,
-      z: camera.position.z / 2,
-    };
-    trackingTarget = {
-      x: MathUtils.lerp(trackingTarget.x, newTarget.x, 0.05),
-      y: MathUtils.lerp(trackingTarget.y, newTarget.y, 0.05),
-      z: MathUtils.lerp(trackingTarget.z, newTarget.z, 0.05),
-    };
+    if (trackingTarget) {
+      const { Head, RightEye, LeftEye } = nodes;
+      const newTarget = {
+        x: ((camera.position.x + mouse.x) * viewport.width) / 2,
+        y: (mouse.y * viewport.height) / 2,
+        z: camera.position.z / 2,
+      };
+      trackingTarget = {
+        x: MathUtils.lerp(trackingTarget.x, newTarget.x, 0.05),
+        y: MathUtils.lerp(trackingTarget.y, newTarget.y, 0.05),
+        z: MathUtils.lerp(trackingTarget.z, newTarget.z, 0.05),
+      };
 
-    Head.lookAt(trackingTarget.x, trackingTarget.y, trackingTarget.z);
-    RightEye.lookAt(newTarget.x, newTarget.y, newTarget.z);
-    LeftEye.lookAt(newTarget.x, newTarget.y, newTarget.z);
+      Head.lookAt(trackingTarget.x, trackingTarget.y, trackingTarget.z);
+      RightEye.lookAt(newTarget.x, newTarget.y, newTarget.z);
+      LeftEye.lookAt(newTarget.x, newTarget.y, newTarget.z);
+    }
   });
 
   return (
