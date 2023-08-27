@@ -38,10 +38,8 @@ export function NavBar({
         </button>
       </div>
       <ul>
-        <li onClick={() => focusOn('LivingRoom')}>Experience</li>
         <li onClick={() => focusOn('Office')}>Interests</li>
         <li onClick={() => focusOn('Bionicle')}>Hobbies</li>
-        <li>Projects</li>
       </ul>
     </nav>
   );
