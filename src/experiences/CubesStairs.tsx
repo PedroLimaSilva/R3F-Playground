@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { cloneElement } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { AdaptiveDpr, Bounds, Loader, OrbitControls } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
@@ -49,7 +49,7 @@ export const POINTS_OF_INTEREST: Array<{
     key: 'LivingRoom',
     position: [0, 1.5, -1],
     margin: 1.5,
-    model: <LivingRoom position={[0, 1, -1]} />,
+    model: <LivingRoom position={[0, 1, -1]} isDarkMode />,
   },
   {
     key: 'Office',
@@ -63,9 +63,11 @@ export const POINTS_OF_INTEREST: Array<{
 export function CubesStairs({
   focusedPOI,
   focusPOI,
+  isDarkMode,
 }: {
   focusedPOI: string;
   focusPOI: React.Dispatch<React.SetStateAction<string>>;
+  isDarkMode: boolean;
 }) {
   return (
     <>
@@ -103,7 +105,7 @@ export function CubesStairs({
           position={[100, 100, 100]}
         />
         <group rotation={[0, Math.PI / 4, 0]}>
-          <Background />
+          <Background isDarkMode={isDarkMode} />
 
           <Robot />
 
@@ -125,7 +127,7 @@ export function CubesStairs({
                     }
                   }}
                 />
-                {poi.model}
+                {poi.model && cloneElement(poi.model, { isDarkMode })}
               </Bounds>
             ))}
           </group>
