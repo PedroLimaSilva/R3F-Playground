@@ -25,7 +25,10 @@ export function NavBar({
         <button
           type="button"
           className="darkModeToggle"
-          onClick={() => setDarkMode(!isDarkMode)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setDarkMode(!isDarkMode);
+          }}
         >
           {isDarkMode ? (
             <span className="material-symbols-outlined">dark_mode</span>
