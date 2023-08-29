@@ -10,7 +10,9 @@ import { Landing } from './Landing';
 
 let trackingTarget: { x: number; y: number; z: number };
 
-export function MainCharacter(props: JSX.IntrinsicElements['group']) {
+export function MainCharacter(
+  props: JSX.IntrinsicElements['group'] & { isDarkMode?: boolean },
+) {
   const hips = useRef(null);
 
   const { nodes, materials } = useGLTF('/model/ReadyPlayerMe.glb') as any;
@@ -50,7 +52,7 @@ export function MainCharacter(props: JSX.IntrinsicElements['group']) {
 
   return (
     <group {...props} dispose={null}>
-      <Landing />
+      <Landing isDarkMode={props.isDarkMode} />
       <group scale={0.35} rotation={[0, -Math.PI / 4, 0]}>
         <primitive ref={hips} object={nodes.Hips} />
         <skinnedMesh

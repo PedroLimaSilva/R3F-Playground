@@ -1,17 +1,10 @@
-import React, {
-  MutableRefObject,
-  cloneElement,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { MutableRefObject, cloneElement, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import {
   AdaptiveDpr,
   Bounds,
   Loader,
   OrbitControls,
-  PivotControls,
   useHelper,
 } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
@@ -33,12 +26,15 @@ import {
   Event,
   MathUtils,
   Object3D,
+  Vector3,
 } from 'three';
 
 const NIGHT_LIGHT_COLOR = new Color('#5779ad');
 const DAY_LIGHT_COLOR = new Color('#FFFFFF');
 const NIGHT_LIGHT_INTENSITY = 1;
 const DAY_LIGHT_INTENSITY = 0.8;
+const NIGHT_LIGHT_POSITION = new Vector3(-1.5, 1, 1);
+const DAY_LIGHT_POSITION = new Vector3(1.5, 1, 1);
 
 export const POINTS_OF_INTEREST: Array<{
   key: string;
@@ -165,6 +161,9 @@ function Lights({ isDarkMode }: { isDarkMode: boolean }) {
   const [fillLightIntensity, setFillLightIntensity] = useState(
     isDarkMode ? NIGHT_LIGHT_INTENSITY : DAY_LIGHT_INTENSITY,
   );
+  const [fillLightPosition, setFillLightPosition] = useState(
+    isDarkMode ? NIGHT_LIGHT_POSITION : DAY_LIGHT_POSITION,
+  );
 
   useFrame(() => {
     if (
@@ -185,6 +184,18 @@ function Lights({ isDarkMode }: { isDarkMode: boolean }) {
     ) {
       const target = isDarkMode ? NIGHT_LIGHT_INTENSITY : DAY_LIGHT_INTENSITY;
       setFillLightIntensity(MathUtils.lerp(fillLightIntensity, target, 0.05));
+    }
+    if (
+      (isDarkMode && fillLightPosition !== NIGHT_LIGHT_POSITION) ||
+      (!isDarkMode && fillLightPosition !== DAY_LIGHT_POSITION)
+    ) {
+      const target = isDarkMode ? NIGHT_LIGHT_POSITION : DAY_LIGHT_POSITION;
+      const newPosition = new Vector3(
+        MathUtils.lerp(fillLightPosition.x, target.x, 0.05),
+        MathUtils.lerp(fillLightPosition.y, target.y, 0.05),
+        MathUtils.lerp(fillLightPosition.z, target.z, 0.05),
+      );
+      setFillLightPosition(newPosition);
     }
   });
 
@@ -208,7 +219,7 @@ function Lights({ isDarkMode }: { isDarkMode: boolean }) {
         shadow-mapSize-width={512}
         intensity={fillLightIntensity}
         color={fillLightColor}
-        position={[1.5, 1, 1]}
+        position={fillLightPosition}
         scale={3}
       />
     </>
