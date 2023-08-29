@@ -113,8 +113,8 @@ export function CubesStairs({
         <AdaptiveDpr pixelated />
         <OrbitControls
           makeDefault
-          maxZoom={2250}
-          minZoom={isPreview ? 0 : 250}
+          maxZoom={1000}
+          minZoom={isPreview ? 0 : 200}
           // maxDistance={1}
           // minDistance={1}
           enablePan={isPreview}
