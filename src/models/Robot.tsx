@@ -30,7 +30,6 @@ export function Robot(props: JSX.IntrinsicElements['group']) {
       <mesh
         name="Brush"
         ref={brush}
-        castShadow
         receiveShadow
         geometry={nodes.Brush.geometry}
         material={materials['Material.002']}
@@ -40,15 +39,12 @@ export function Robot(props: JSX.IntrinsicElements['group']) {
       />
       <mesh
         name="Body"
-        castShadow
         receiveShadow
         geometry={nodes.Body.geometry}
         material={materials['Material.001']}
       />
       <mesh
         name="Shadow"
-        castShadow
-        receiveShadow
         geometry={nodes.Shadow.geometry}
         material={materials['Material.003']}
         position={[0, 0.029, 0]}

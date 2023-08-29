@@ -1,6 +1,19 @@
-import React, { cloneElement, useMemo, useState } from 'react';
+import React, {
+  MutableRefObject,
+  cloneElement,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { AdaptiveDpr, Bounds, Loader, OrbitControls } from '@react-three/drei';
+import {
+  AdaptiveDpr,
+  Bounds,
+  Loader,
+  OrbitControls,
+  PivotControls,
+  useHelper,
+} from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 
 import { PointOfInterest } from '../components/PointOfInterest';
@@ -13,7 +26,14 @@ import { isPreview } from '../environment';
 // import { Hogwarts } from '../models/Hogwarts';
 import { MainCharacter } from '../models/MainCharacter';
 import { Robot } from '../models/Robot';
-import { Color, MathUtils } from 'three';
+import {
+  Color,
+  DirectionalLight,
+  DirectionalLightHelper,
+  Event,
+  MathUtils,
+  Object3D,
+} from 'three';
 
 const NIGHT_LIGHT_COLOR = new Color('#5779ad');
 const DAY_LIGHT_COLOR = new Color('#FFFFFF');
@@ -78,6 +98,7 @@ export function CubesStairs({
   return (
     <>
       <Canvas
+        shadows
         flat
         orthographic
         camera={{
@@ -167,16 +188,28 @@ function Lights({ isDarkMode }: { isDarkMode: boolean }) {
     }
   });
 
+  const dirLight = useRef<DirectionalLight>(null);
+
+  isPreview &&
+    useHelper(
+      dirLight as MutableRefObject<Object3D<Event>>,
+      DirectionalLightHelper,
+      1,
+      'red',
+    );
+
   return (
     <>
       <ambientLight intensity={0.8} color={fillLightColor} />
-      <pointLight
+      <directionalLight
+        ref={dirLight}
         castShadow
         shadow-mapSize-height={512}
         shadow-mapSize-width={512}
         intensity={fillLightIntensity}
         color={fillLightColor}
-        position={[100, 100, 100]}
+        position={[1.5, 1, 1]}
+        scale={3}
       />
     </>
   );
