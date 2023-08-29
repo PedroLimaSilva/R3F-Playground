@@ -8,8 +8,8 @@ import { MathUtils, ShaderMaterial, TextureLoader } from 'three';
 import { DefaultVertex, TextureMixFragment } from '../materials/TextureMix';
 
 const POSITIONS: Array<[number, number, number]> = [
-  // [0, 0, 0], // 0 FloatingCube
-  // [1, 0, 1], // R1 Hogwarts
+  // [0, 0, 0], // 0 Landing
+  // [1, 0, 1], // R1 Matoran
   [-1, 0, -1], // L1
   [2, 0, 2], // R2
   [-2, 0, -2], // L2
@@ -27,7 +27,7 @@ const POSITIONS: Array<[number, number, number]> = [
   [4, 1, 3], // R4
   [-3, 1, -4], // L4
 
-  // [0, -1, 1], // R1 Bionicle
+  [0, -1, 1], // R1
   [-1, -1, 0], // L1
   [1, -1, 2], // R2
   [-2, -1, -1], // L2

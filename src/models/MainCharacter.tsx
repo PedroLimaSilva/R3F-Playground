@@ -8,22 +8,25 @@ import { AnimationAction, MathUtils } from 'three';
 import { useFrame } from '@react-three/fiber';
 import { Landing } from './Landing';
 
+let trackingTarget: { x: number; y: number; z: number };
+
 export function MainCharacter(props: JSX.IntrinsicElements['group']) {
   const hips = useRef(null);
 
   const { nodes, materials } = useGLTF('/model/ReadyPlayerMe.glb') as any;
   const { animations } = useGLTF('/model/MaleIdle.glb');
   const { actions } = useAnimations(animations, hips);
-  let trackingTarget: { x: number; y: number; z: number };
 
   useEffect(() => {
     (actions?.['Armature|mixamo.com|Layer0.001'] as AnimationAction).play();
-    trackingTarget = {
-      x: 0,
-      y: 0,
-      z: 0,
-    };
-  }, []);
+    if (!trackingTarget) {
+      trackingTarget = {
+        x: 0,
+        y: 0,
+        z: 0,
+      };
+    }
+  });
 
   useFrame(({ mouse, viewport, camera }) => {
     if (trackingTarget) {

@@ -1,5 +1,5 @@
-import React, { cloneElement } from 'react';
-import { Canvas } from '@react-three/fiber';
+import React, { cloneElement, useMemo, useState } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { AdaptiveDpr, Bounds, Loader, OrbitControls } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 
@@ -10,9 +10,15 @@ import { LivingRoom } from '../models/LivingRoom';
 import { Office } from '../models/Office';
 import { Background } from '../models/Background';
 import { isPreview } from '../environment';
-import { Hogwarts } from '../models/Hogwarts';
+// import { Hogwarts } from '../models/Hogwarts';
 import { MainCharacter } from '../models/MainCharacter';
 import { Robot } from '../models/Robot';
+import { Color, MathUtils } from 'three';
+
+const NIGHT_LIGHT_COLOR = new Color('#5779ad');
+const DAY_LIGHT_COLOR = new Color('#FFFFFF');
+const NIGHT_LIGHT_INTENSITY = 1;
+const DAY_LIGHT_INTENSITY = 0.8;
 
 export const POINTS_OF_INTEREST: Array<{
   key: string;
@@ -28,22 +34,22 @@ export const POINTS_OF_INTEREST: Array<{
     margin: 1.5,
     model: <MainCharacter position={[0, 0, 0]} />,
   },
-  {
-    position: [1, 0.5, 1],
-    key: 'Hogwarts',
-    margin: 1.5,
-    model: <Hogwarts position={[1, 0, 1]} />,
-  },
+  // { // TOO BIG; FIX IT
+  //   position: [1, 0.5, 1],
+  //   key: 'Hogwarts',
+  //   margin: 1.5,
+  //   model: <Hogwarts position={[1, 0, 1]} />,
+  // },
   {
     key: `Undecided ${[-1, 0.5, -1]}`,
     position: [-1, 0.5, -1],
     margin: 1.5,
   },
   {
-    position: [0, -0.5, 1],
+    position: [1, 0.5, 1],
     key: 'Bionicle',
     margin: 1.5,
-    model: <AvMatoran position={[0, -1, 1]} />,
+    model: <AvMatoran position={[1, 0, 1]} />,
   },
   {
     key: 'LivingRoom',
@@ -96,14 +102,7 @@ export function CubesStairs({
           minAzimuthAngle={-Math.PI / 4}
         />
 
-        <ambientLight intensity={0.5} />
-        <pointLight
-          castShadow
-          shadow-mapSize-height={512}
-          shadow-mapSize-width={512}
-          intensity={0.8}
-          position={[100, 100, 100]}
-        />
+        <Lights isDarkMode={isDarkMode} />
         <group rotation={[0, Math.PI / 4, 0]}>
           <Background isDarkMode={isDarkMode} />
 
@@ -134,6 +133,51 @@ export function CubesStairs({
         </group>
       </Canvas>
       <Loader />
+    </>
+  );
+}
+
+function Lights({ isDarkMode }: { isDarkMode: boolean }) {
+  const [fillLightColor, setFillLightColor] = useState(
+    isDarkMode ? NIGHT_LIGHT_COLOR : DAY_LIGHT_COLOR,
+  );
+  const [fillLightIntensity, setFillLightIntensity] = useState(
+    isDarkMode ? NIGHT_LIGHT_INTENSITY : DAY_LIGHT_INTENSITY,
+  );
+
+  useFrame(() => {
+    if (
+      (isDarkMode && fillLightColor !== NIGHT_LIGHT_COLOR) ||
+      (!isDarkMode && fillLightColor !== DAY_LIGHT_COLOR)
+    ) {
+      const targetColor = isDarkMode ? NIGHT_LIGHT_COLOR : DAY_LIGHT_COLOR;
+      const newColor = new Color(
+        MathUtils.lerp(fillLightColor.r, targetColor.r, 0.05),
+        MathUtils.lerp(fillLightColor.g, targetColor.g, 0.05),
+        MathUtils.lerp(fillLightColor.b, targetColor.b, 0.05),
+      );
+      setFillLightColor(newColor);
+    }
+    if (
+      (isDarkMode && fillLightIntensity !== NIGHT_LIGHT_INTENSITY) ||
+      (!isDarkMode && fillLightIntensity !== DAY_LIGHT_INTENSITY)
+    ) {
+      const target = isDarkMode ? NIGHT_LIGHT_INTENSITY : DAY_LIGHT_INTENSITY;
+      setFillLightIntensity(MathUtils.lerp(fillLightIntensity, target, 0.05));
+    }
+  });
+
+  return (
+    <>
+      <ambientLight intensity={0.8} color={fillLightColor} />
+      <pointLight
+        castShadow
+        shadow-mapSize-height={512}
+        shadow-mapSize-width={512}
+        intensity={fillLightIntensity}
+        color={fillLightColor}
+        position={[100, 100, 100]}
+      />
     </>
   );
 }
