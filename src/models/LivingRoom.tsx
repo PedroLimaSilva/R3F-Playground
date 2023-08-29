@@ -41,18 +41,18 @@ export function LivingRoom(
 
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.TV_Baked.geometry} material={material} />
-      <mesh geometry={nodes.Xbox_Baked.geometry} material={material} />
-      <mesh castShadow geometry={nodes.Sofa_Baked.geometry} material={material} />
+      <mesh geometry={nodes.TV.geometry} material={material} />
+      <mesh geometry={nodes.Xbox.geometry} material={material} />
+      <mesh castShadow geometry={nodes.Sofa.geometry} material={material} />
       <mesh
         castShadow
-        geometry={nodes.TV_Cabinet_Baked.geometry}
+        geometry={nodes.TV_Cabinet.geometry}
         material={material}
       />
-      <mesh castShadow geometry={nodes.Walls_Baked.geometry} material={material} />
-      <mesh castShadow geometry={nodes.Door_Baked.geometry} material={material} />
-      <mesh geometry={nodes.Planks_Baked.geometry} material={material} />
-      <mesh geometry={nodes.Foundation_Baked.geometry} material={material} />
+      <mesh castShadow geometry={nodes.Walls.geometry} material={material} />
+      <mesh castShadow geometry={nodes.Door.geometry} material={material} />
+      <mesh geometry={nodes.Planks.geometry} material={material} />
+      <mesh geometry={nodes.Foundation.geometry} material={material} />
     </group>
   );
 }
