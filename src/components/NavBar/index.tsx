@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { POINTS_OF_INTEREST } from '../../experiences/CubesStairs';
+import { Document } from '../Document';
+import { PointOfInterestKey } from '../../shared';
 
 export function NavBar({
   focusedPOI,
@@ -7,12 +8,12 @@ export function NavBar({
   isDarkMode,
   setDarkMode,
 }: {
-  focusedPOI: string;
-  focusPOI: React.Dispatch<React.SetStateAction<string>>;
+  focusedPOI: PointOfInterestKey;
+  focusPOI: React.Dispatch<React.SetStateAction<PointOfInterestKey>>;
   isDarkMode: boolean;
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  function focusOn(key: string) {
+  function focusOn(key: PointOfInterestKey) {
     focusPOI(key);
     setNav(false);
   }
@@ -50,6 +51,7 @@ export function NavBar({
   const [isOpen, setNav] = useState(false);
   return (
     <nav className={`NavBar ${isOpen && 'open'} ${!isPortrait && 'landscape'}`}>
+      <Document isPortrait={isPortrait} focusedPOI={focusedPOI}></Document>
       <div className="header" onClick={() => setNav(!isOpen)}>
         <p>
           hello
@@ -73,8 +75,8 @@ export function NavBar({
         </button>
       </div>
       <ul>
-        <li onClick={() => focusOn('Office')}>Interests</li>
-        <li onClick={() => focusOn('Bionicle')}>Hobbies</li>
+        <li onClick={() => focusOn(PointOfInterestKey.Office)}>Interests</li>
+        <li onClick={() => focusOn(PointOfInterestKey.Bionicle)}>Hobbies</li>
       </ul>
     </nav>
   );

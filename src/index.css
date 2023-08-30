@@ -28,6 +28,7 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 body main {
@@ -99,6 +100,7 @@ main > * {
   transform: scaleY(0);
   transform-origin: bottom;
   transition: transform 0.3s ease;
+  z-index: 1;
 }
 
 .NavBar.landscape ul {
@@ -161,6 +163,47 @@ main > * {
 .landscape .darkModeToggle {
   bottom: 5vh;
   right: unset;
+}
+
+.Document {
+  padding: 1em 1em 5em;
+  backdrop-filter: blur(10px);
+  background-color: rgba(55, 55, 55, 0.5);
+  color: #ccc;
+  position: absolute;
+  bottom: var(--navbar-height);
+  width: 100vw;
+  transform: scaleY(1) translate(0, 75%);
+  transition: transform 0.5s ease;
+  min-height: 40vh;
+  max-height: calc(90vh - var(--navbar-height));
+  max-width: unset;
+  overflow-y: auto;
+  transform-origin: center bottom;
+}
+
+.Document.landscape {
+  width: auto;
+  height: 100vh;
+  bottom: unset;
+  right: var(--navbar-height);
+  min-width: 40vw;
+  max-width: calc(90vw - var(--navbar-height));
+  max-height: unset;
+  transform: scaleX(1) translate(75%, 0);
+  transform-origin: right center;
+}
+
+.Document.landscape.slideOut {
+  transform: scaleX(0);
+}
+
+.Document:hover {
+  transform: translate(0, 0);
+}
+
+.Document.slideOut {
+  transform: scaleY(0);
 }
 
 .annotation {

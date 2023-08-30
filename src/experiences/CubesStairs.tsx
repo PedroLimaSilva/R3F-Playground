@@ -28,6 +28,7 @@ import {
   Object3D,
   Vector3,
 } from 'three';
+import { PointOfInterestKey } from '../shared';
 
 const NIGHT_LIGHT_COLOR = new Color('#5779ad');
 const DAY_LIGHT_COLOR = new Color('#FFFFFF');
@@ -37,7 +38,7 @@ const NIGHT_LIGHT_POSITION = new Vector3(-1.5, 1, 1);
 const DAY_LIGHT_POSITION = new Vector3(1.5, 1, 1);
 
 export const POINTS_OF_INTEREST: Array<{
-  key: string;
+  key: PointOfInterestKey;
   position: [number, number, number];
   margin: number;
   scale?: number;
@@ -45,41 +46,45 @@ export const POINTS_OF_INTEREST: Array<{
   model?: JSX.Element;
 }> = [
   {
-    key: 'MainCharacter',
+    key: PointOfInterestKey.MainCharacter,
     position: [0, 0.5, 0],
     margin: 1.5,
     model: <MainCharacter position={[0, 0, 0]} />,
   },
   // { // TOO BIG; FIX IT
   //   position: [1, 0.5, 1],
-  //   key: 'Hogwarts',
+  //   key: PointOfInterestKey.Hogwarts,
   //   margin: 1.5,
   //   model: <Hogwarts position={[1, 0, 1]} />,
   // },
   {
-    key: `Undecided ${[-1, 0.5, -1]}`,
+    key: PointOfInterestKey['Undecided [-1, 0.5, -1]'],
     position: [-1, 0.5, -1],
     margin: 1.5,
   },
   {
     position: [1, 0.5, 1],
-    key: 'Bionicle',
+    key: PointOfInterestKey.Bionicle,
     margin: 1.5,
     model: <AvMatoran position={[1, 0, 1]} />,
   },
   {
-    key: 'LivingRoom',
+    key: PointOfInterestKey.LivingRoom,
     position: [0, 1.5, -1],
     margin: 1.5,
     model: <LivingRoom position={[0, 1, -1]} isDarkMode />,
   },
   {
-    key: 'Office',
+    key: PointOfInterestKey.Office,
     position: [1, 1.5, 0],
     margin: 1.5,
     model: <Office position={[1, 1, 0]} />,
   },
-  { key: `Undecided ${[-1, -0.5, 0]}`, position: [-1, -0.5, 0], margin: 1.5 },
+  {
+    key: PointOfInterestKey['Undecided [-1, -0.5, 0]'],
+    position: [-1, -0.5, 0],
+    margin: 1.5,
+  },
 ];
 
 export function CubesStairs({
@@ -87,8 +92,8 @@ export function CubesStairs({
   focusPOI,
   isDarkMode,
 }: {
-  focusedPOI: string;
-  focusPOI: React.Dispatch<React.SetStateAction<string>>;
+  focusedPOI: PointOfInterestKey;
+  focusPOI: React.Dispatch<React.SetStateAction<PointOfInterestKey>>;
   isDarkMode: boolean;
 }) {
   return (
