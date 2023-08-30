@@ -17,11 +17,36 @@ export function NavBar({
     setNav(false);
   }
 
+  const [isPortrait, setIsPortrait] = React.useState(
+    window.innerHeight > window.innerWidth,
+  );
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsPortrait(window.innerHeight > window.innerWidth);
+    };
+
+    window.addEventListener(
+      'resize',
+      handleResize as unknown as (this: Window, ev: UIEvent) => any,
+    );
+
+    return () => {
+      window.removeEventListener(
+        'resize',
+        handleResize as unknown as (this: Window, ev: UIEvent) => any,
+      );
+    };
+  }, []);
+
   const [isOpen, setNav] = useState(false);
   return (
-    <nav className={`NavBar ${isOpen && 'open'}`}>
+    <nav className={`NavBar ${isOpen && 'open'} ${!isPortrait && 'landscape'}`}>
       <div className="header" onClick={() => setNav(!isOpen)}>
-        hello<span className="fade-in delayed-5">, would you like a tour?</span>
+        <p>
+          hello
+          <span className="question fade-in delayed-5">, would you like a tour?</span>
+        </p>
         <button
           type="button"
           className="darkModeToggle"
