@@ -1,12 +1,16 @@
 :root {
   --navbar-height: 70px;
-  --navbar-background: rgba(230, 230, 230, 0.1);
+  --navbar-background: rgba(64, 64, 64, 0.5);
+  --document-background-color: rgba(55, 55, 55, 0.5);
 
   --background-color: #333;
   --text-color: #ccc;
 }
 
 :root .light {
+  --navbar-background: rgba(230, 230, 230, 0.5);
+  --document-background-color: rgba(94, 94, 94, 0.5);
+
   --background-color: #ccc;
   --text-color: #222;
 }
@@ -168,8 +172,8 @@ main > * {
 .Document {
   padding: 1em 1em 5em;
   backdrop-filter: blur(10px);
-  background-color: rgba(55, 55, 55, 0.5);
-  color: #ccc;
+  background-color: var(--document-background-color);
+  color: var(--text-color);
   position: absolute;
   bottom: var(--navbar-height);
   width: 100vw;
