@@ -30,11 +30,19 @@ export function NavBar({
       'resize',
       handleResize as unknown as (this: Window, ev: UIEvent) => any,
     );
+    window.addEventListener(
+      'orientationchange',
+      handleResize as unknown as (this: Window, ev: Event) => any,
+    );
 
     return () => {
       window.removeEventListener(
         'resize',
         handleResize as unknown as (this: Window, ev: UIEvent) => any,
+      );
+      window.removeEventListener(
+        'orientationchange',
+        handleResize as unknown as (this: Window, ev: Event) => any,
       );
     };
   }, []);
@@ -45,7 +53,9 @@ export function NavBar({
       <div className="header" onClick={() => setNav(!isOpen)}>
         <p>
           hello
-          <span className="question fade-in delayed-5">, would you like a tour?</span>
+          <span className="question fade-in delayed-5">
+            , would you like a tour?
+          </span>
         </p>
         <button
           type="button"
