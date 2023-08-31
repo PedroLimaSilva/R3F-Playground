@@ -100,24 +100,24 @@ export function CubesStairs({
     <>
       <Canvas
         shadows
-        flat
-        orthographic
         camera={{
-          fov: 45,
+          fov: 25,
           near: 0.01,
           far: 200,
-          zoom: 100,
+          zoom: 1,
           position: [0, 20, 100],
         }}
+        color={isDarkMode ? '#ccc' : '#333'}
       >
         {isPreview && <Perf position="top-left" />}
         <AdaptiveDpr pixelated />
         <OrbitControls
           makeDefault
-          maxZoom={1000}
-          minZoom={isPreview ? 0 : 200}
-          // maxDistance={1}
-          // minDistance={1}
+          // maxZoom={1}
+          // minZoom={isPreview ? 0 : 200}
+          maxDistance={0.5}
+          minDistance={0}
+          enableZoom={false} // figure out how to limit the zoom
           enablePan={isPreview}
           maxPolarAngle={Math.PI / 2}
           maxAzimuthAngle={Math.PI / 4}
