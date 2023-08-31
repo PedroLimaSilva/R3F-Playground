@@ -10,7 +10,7 @@ import { DefaultVertex, TextureMixFragment } from '../materials/TextureMix';
 export function Office(
   props: JSX.IntrinsicElements['group'] & { isDarkMode?: boolean },
 ) {
-  const { nodes, materials } = useGLTF('/model/Office.glb') as any;
+  const { nodes } = useGLTF('/model/Office.glb') as any;
 
   const nightTexture = useLoader(TextureLoader, '/model/Office_Night.png');
   nightTexture.flipY = false;
@@ -42,44 +42,50 @@ export function Office(
   return (
     <group {...props} dispose={null}>
       <mesh
-        name="Desk001_Baked"
-        geometry={nodes.Desk001_Baked.geometry}
+        geometry={nodes.Desk001.geometry}
         material={material}
         position={[0.5, 0, 0]}
       />
       <mesh
-        name="Desk_Baked"
-        geometry={nodes.Desk_Baked.geometry}
+        geometry={nodes.Desk.geometry}
         material={material}
         position={[0, 0, 0.5]}
         rotation={[Math.PI, -Math.PI / 2, 0]}
         scale={-1}
       />
       <mesh
-        name="Door001_Baked"
-        geometry={nodes.Door001_Baked.geometry}
+        geometry={nodes.Door001.geometry}
         material={material}
         position={[-0.203, 0, 0]}
         rotation={[-Math.PI, Math.PI / 2, 0]}
         scale={-1}
       />
       <mesh
-        name="Foundation001_Baked"
-        geometry={nodes.Foundation001_Baked.geometry}
+        geometry={nodes.Foundation001.geometry}
         material={material}
         rotation={[-Math.PI, Math.PI / 2, 0]}
         scale={-1}
       />
       <mesh
-        name="Planks001_Baked"
-        geometry={nodes.Planks001_Baked.geometry}
+        geometry={nodes.Planks001.geometry}
         material={material}
         rotation={[-Math.PI, Math.PI / 2, 0]}
         scale={-1}
       />
       <mesh
-        name="Walls001_Baked"
-        geometry={nodes.Walls001_Baked.geometry}
+        geometry={nodes.Desk_drawer.geometry}
+        material={material}
+        position={[0.439, 0.318, -0.086]}
+        scale={[1.148, 0.674, 2.005]}
+      />
+      <mesh
+        geometry={nodes.Monitor.geometry}
+        material={material}
+        position={[0.368, 0.412, 0.24]}
+      />
+      <mesh geometry={nodes.Monitor_Arm.geometry} material={material} />
+      <mesh
+        geometry={nodes.Walls001.geometry}
         material={material}
         rotation={[-Math.PI, Math.PI / 2, 0]}
         scale={-1}
