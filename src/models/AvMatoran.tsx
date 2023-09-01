@@ -42,60 +42,31 @@ export function AvMatoran(
 
   return (
     <group {...props} dispose={null}>
-      <group>
-        <mesh geometry={nodes.BG2face.geometry} material={material} />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes['Part-32579_dot_dat001'].geometry}
-          material={materials['Material.022']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes['Part-32579_dot_dat001_1'].geometry}
-          material={materials['Material.023']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes['Part-32579_dot_dat001_2'].geometry}
-          material={materials['Material.028']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes['Part-32579_dot_dat001_3'].geometry}
-          material={materials['Material.027']}
-        />
-      </group>
-      <group scale={[1, 1, -1]} position={[0, 0, -1]}>
-        <mesh geometry={nodes.BG2face.geometry} material={material} />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes['Part-32579_dot_dat001'].geometry}
-          material={materials['Material.022']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes['Part-32579_dot_dat001_1'].geometry}
-          material={materials['Material.023']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes['Part-32579_dot_dat001_2'].geometry}
-          material={materials['Material.028']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes['Part-32579_dot_dat001_3'].geometry}
-          material={materials['Material.027']}
-        />
-      </group>
+      <mesh geometry={nodes.BG2face.geometry} material={material} />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes['Part-32579_dot_dat001'].geometry}
+        material={materials['Material.022']}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes['Part-32579_dot_dat001_1'].geometry}
+        material={materials['Material.023']}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes['Part-32579_dot_dat001_2'].geometry}
+        material={materials['Material.028']}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes['Part-32579_dot_dat001_3'].geometry}
+        material={materials['Material.027']}
+      />
     </group>
   );
 }

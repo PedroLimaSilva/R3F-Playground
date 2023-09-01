@@ -43,6 +43,7 @@ export const POINTS_OF_INTEREST: Array<{
   margin: number;
   scale?: number;
   childOf?: number[];
+  ignoreClick?: boolean;
   model?: JSX.Element;
 }> = [
   {
@@ -67,6 +68,13 @@ export const POINTS_OF_INTEREST: Array<{
     key: PointOfInterestKey.Bionicle,
     margin: 1.5,
     model: <AvMatoran position={[1, 0, 1]} />,
+  },
+  {
+    position: [1, 0.5, 1],
+    key: PointOfInterestKey.BionicleMirror,
+    margin: 1.5,
+    ignoreClick: true,
+    model: <AvMatoran scale={[1, 1, -1]} position={[1, 0, 0]} />,
   },
   {
     key: PointOfInterestKey.LivingRoom,
@@ -133,7 +141,7 @@ export function CubesStairs({
           <group>
             {POINTS_OF_INTEREST.map((poi) => (
               <Bounds
-                fit={focusedPOI === poi.key}
+                fit={focusedPOI === poi.key && !poi.ignoreClick}
                 key={`POI:${poi.key}`}
                 clip
                 observe
@@ -143,7 +151,7 @@ export function CubesStairs({
                   position={poi.position}
                   scale={poi.scale === undefined ? 1 : poi.scale}
                   onClick={() => {
-                    if (focusedPOI !== poi.key) {
+                    if (focusedPOI !== poi.key && !poi.ignoreClick) {
                       focusPOI(poi.key);
                     }
                   }}
