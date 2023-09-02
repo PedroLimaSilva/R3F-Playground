@@ -79,8 +79,8 @@ const POSITIONS: Array<[number, number, number]> = [
   [-4, -4, 0], // L2
 ];
 
-export function Background(
-  props: JSX.IntrinsicElements['group'] & { isDarkMode: boolean },
+export function BackgroundInstance(
+  props: JSX.IntrinsicElements['group'] & { isDarkMode?: boolean },
 ) {
   const { nodes } = useGLTF('/model/BackgroundInstance.glb') as any;
 
@@ -111,12 +111,25 @@ export function Background(
     [mix],
   );
 
-  const mesh = POSITIONS.map((pos) => (
+  return (
     <mesh
-      key={`BG:${pos.toString()}`}
-      position={[pos[0], pos[1] + 0.5, pos[2]]}
+      position={props.position}
+      scale={props.scale}
+      rotation={props.rotation}
       geometry={nodes.Cube001_Baked.geometry}
       material={material}
+    />
+  );
+}
+
+export function Background(
+  props: JSX.IntrinsicElements['group'] & { isDarkMode: boolean },
+) {
+  const mesh = POSITIONS.map((pos) => (
+    <BackgroundInstance
+      isDarkMode={props.isDarkMode}
+      key={`BG:${pos.toString()}`}
+      position={[pos[0], pos[1] + 0.5, pos[2]]}
     />
   ));
 

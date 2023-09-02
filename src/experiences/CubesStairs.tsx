@@ -29,6 +29,7 @@ import {
   Vector3,
 } from 'three';
 import { PointOfInterestKey } from '../shared';
+import { Mirror } from '../models/Mirror';
 
 const NIGHT_LIGHT_COLOR = new Color('#5779ad');
 const DAY_LIGHT_COLOR = new Color('#FFFFFF');
@@ -74,7 +75,7 @@ export const POINTS_OF_INTEREST: Array<{
     key: PointOfInterestKey.BionicleMirror,
     margin: 1.5,
     ignoreClick: true,
-    model: <AvMatoran scale={[1, 1, -1]} position={[1, 0, 0]} />,
+    model: <Mirror scale={[1, 1, -1]} position={[1, 0, 0]} />,
   },
   {
     key: PointOfInterestKey.LivingRoom,
