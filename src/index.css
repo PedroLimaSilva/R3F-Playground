@@ -186,6 +186,13 @@ main > * {
   transform-origin: center bottom;
 }
 
+.Document.slideOut {
+  transform: scaleY(0) translate(0, 75%);
+}
+.Document.slideOut:hover {
+  transform: scaleY(0) translate(0, 0);
+}
+
 .Document.landscape {
   width: auto;
   height: 100vh;
@@ -199,15 +206,14 @@ main > * {
 }
 
 .Document.landscape.slideOut {
-  transform: scaleX(0);
+  transform: scaleX(0) translate(75%, 0);
+}
+.Document.landscape.slideOut:hover {
+  transform: scaleX(0) translate(0, 0);
 }
 
 .Document:hover {
   transform: translate(0, 0);
-}
-
-.Document.slideOut {
-  transform: scaleY(0);
 }
 
 .annotation {
